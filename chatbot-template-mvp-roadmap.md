@@ -17,12 +17,12 @@ A provider-agnostic, reusable chatbot component system with two delivery methods
 - [✅] Initialize monorepo structure (pnpm workspaces)
   - `/packages/chatbot-core` - The reusable component library
   - `/apps/playground` - The standalone webapp
-- [ ] Configure TypeScript, ESLint, Prettier
-- [ ] Set up Vitest for testing
-- [ ] Create basic README with project vision
+- [✅] Configure TypeScript, ESLint, Prettier
+- [✅] Set up Vitest for testing
+- [✅] Create basic README with project vision
 
 ### 1.2 Basic Chat UI Component
-- [ ] Build `<ChatWindow />` component with message list
+- [✅] Build `<ChatWindow />` component with message list
 - [ ] Build `<ChatInput />` component with send button
 - [ ] Build `<ChatMessage />` component (user vs assistant styling)
 - [ ] Build `<ChatBubble />` wrapper component

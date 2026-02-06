@@ -1,82 +1,147 @@
-# dev-genesis
+# Chatbot Template
 
-**From idea to code in under 30 minutes.**
+> **Drop-in AI chatbot components for any React project.**
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Status](https://img.shields.io/badge/status-Production-brightgreen.svg)
+![Build Status](https://img.shields.io/badge/status-Development-yellow.svg)
 
 ---
 
 ## What & Why
 
 **The Problem:**
-Starting a new project means hours of boilerplate setup—configuring AI assistants, creating issue templates, setting up GitHub automation, and establishing code quality standards before writing a single line of actual code.
+Adding an AI chatbot to your React app means wrestling with streaming APIs, state management, styling inconsistencies, and provider lock-in—all before your users can send a single message.
 
 **Our Solution:**
-dev-genesis is a GitHub template repository that gives you professional-grade infrastructure instantly. AI-assisted planning prompts help you refine ideas and generate organized GitHub issues, while pre-configured tooling for Claude Code, Cursor, Copilot, and Windsurf lets you start building immediately.
-
----
-
-## Visual Preview
-
-```
-IDEATE ──────▶ PLAN ──────▶ IMPORT ──────▶ BUILD
-   │             │             │             │
-Refine idea   Generate     Create        Start coding
-with AI       issues.json  GitHub        with AI
-(10 min)      (10 min)     issues        assistance
-                           (2 min)
-```
+Chatbot Template is a provider-agnostic component library that gives you a production-ready chat UI out of the box. Configure your AI provider, drop in `<ChatBot />`, and ship. Use the playground app to visually customize styles and export your config.
 
 ---
 
 ## Quick Start
 
 ```bash
-# 1. Create your repository from this template
-gh repo create my-project --template G-Hensley/dev-genesis
+# Clone and install
+git clone https://github.com/G-Hensley/chatbot-template.git
+cd chatbot-template
+pnpm install
 
-# 2. Run setup wizard
-./scripts/unix/setup.sh      # macOS/Linux
-.\scripts\windows\setup.ps1  # Windows
+# Run the playground app
+pnpm dev
 
-# 3. Install Probot Settings app (5 min - recommended)
-# Automatically configures branch protection, labels, and repo settings
-# Visit: https://github.com/apps/settings
-
-# 4. Plan with AI (copy prompts to Claude, ChatGPT, etc.)
-# prompts/IDEA_REFINEMENT.md → prompts/PROJECT_PLANNING.md
-
-# 5. Import generated issues
-./scripts/unix/import-issues.sh issues.json
+# Run tests
+pnpm test
 ```
 
-> **💡 Pro Tip:** Install the [Probot Settings app](https://github.com/apps/settings) to automatically configure branch protection, required status checks, and 30+ labels. Takes 5 minutes and saves you hours of manual setup. See [Getting Started Guide](docs/GETTING_STARTED.md#repository-settings-probot) for details.
+### Using the Package (coming soon)
+
+```bash
+pnpm add @codaissance/chatbot
+```
+
+```tsx
+import { ChatBot } from '@codaissance/chatbot';
+
+function App() {
+  return (
+    <ChatBot
+      provider="anthropic"
+      model="claude-3-5-haiku-20241022"
+      systemPrompt="You are a helpful assistant."
+    />
+  );
+}
+```
 
 ---
 
-## Full Documentation & Contributing
+## Visual Preview
 
-All comprehensive documentation lives in our **[Wiki](../../wiki)**:
+```
+┌─────────────────────────────────────────────────────────────┐
+│  PACKAGE                         PLAYGROUND                 │
+│  ────────                        ──────────                 │
+│  @codaissance/chatbot    ───▶    Visual Configurator        │
+│                                                             │
+│  • ChatBot component             • Style presets            │
+│  • Streaming hooks               • Color schemes            │
+│  • Provider abstraction          • Live preview             │
+│  • Style presets                 • Export config            │
+└─────────────────────────────────────────────────────────────┘
+```
 
-- **Getting Started** - Detailed setup, configuration, and first-time use
-- **What's Included** - AI configs, GitHub automation, templates, and tooling
-- **Project Structure** - Complete file and folder breakdown
-- **Customization** - How to adapt the template for your needs
-- **Contributing Guidelines** - How to contribute and submit PRs
+---
 
-**Want to contribute?** Check out our [Contributing Guide](CONTRIBUTING.md) to get started!
+## Documentation
+
+Full documentation is available in our **[Wiki](https://github.com/G-Hensley/chatbot-template/wiki)**:
+
+| Guide | Description |
+|-------|-------------|
+| [Getting Started](https://github.com/G-Hensley/chatbot-template/wiki/Getting-Started) | Installation, configuration, first chatbot |
+| [Configuration](https://github.com/G-Hensley/chatbot-template/wiki/Configuration) | All config options explained |
+| [Styling](https://github.com/G-Hensley/chatbot-template/wiki/Styling) | Morphism presets, theming, customization |
+| [Providers](https://github.com/G-Hensley/chatbot-template/wiki/Providers) | Anthropic, OpenAI, and adding your own |
+| [API Reference](https://github.com/G-Hensley/chatbot-template/wiki/API) | GraphQL schema, component props, hooks |
+| [Contributing](CONTRIBUTING.md) | How to contribute to this project |
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Language | TypeScript |
+| Framework | React, Next.js (playground) |
+| Styling | Tailwind CSS |
+| AI SDK | Vercel AI SDK |
+| API | GraphQL (Apollo Server) |
+| Testing | Vitest |
+| Package Manager | pnpm (workspaces) |
+
+**Default Model:** Claude 3.5 Haiku (configurable)
+
+---
+
+## Project Structure
+
+```
+chatbot-template/
+├── packages/
+│   └── chatbot-core/       # Reusable component library
+│       ├── components/     # ChatBot, ChatWindow, ChatInput, etc.
+│       ├── hooks/          # useChat, useChatConfig, useStreaming
+│       ├── styles/         # Presets (flat, neumorphism, glass, clay)
+│       └── providers/      # AI provider abstraction
+├── apps/
+│   └── playground/         # Next.js configurator webapp
+│       ├── app/            # Pages and API routes
+│       └── components/     # Configurator UI, Preview panel
+├── docs/                   # Documentation
+└── prompts/                # LLM prompt templates for setup help
+```
+
+---
+
+## Features
+
+- **Provider Agnostic** - Works with Anthropic, OpenAI, and custom providers
+- **Streaming First** - Token-by-token rendering with abort support
+- **Style Presets** - Flat, Neumorphism, Glassmorphism, Claymorphism
+- **Visual Configurator** - Point-and-click styling in the playground
+- **TypeScript Native** - Full type safety and IntelliSense
+- **Accessible** - Keyboard navigation and screen reader support
 
 ---
 
 ## Contributors
 
-- [@G-Hensley](https://github.com/G-Hensley) - Creator & Maintainer
-- [Claude](https://claude.ai) - AI Pair Programmer
+| Contributor | Role |
+|-------------|------|
+| [@G-Hensley](https://github.com/G-Hensley) | Creator & Maintainer |
 
 ---
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE).
